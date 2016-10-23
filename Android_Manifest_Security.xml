@@ -1,0 +1,63 @@
+/* The following uses URI to declare the 3rd party content provider and the path to the content: */
+
+	content://com.example.testapps.test1.mailprovider/messages/inbox/255
+	
+
+/* The following sets permissions to start an app activity: */
+
+	<activity android:name=".Activity"
+	
+              android:permission="com.example.exampleapp.test.permission.START_ACTIVITY">
+              <intent-filter>
+                 ...
+              </intent-filter>
+			  
+    </activity>
+	
+	
+/* The following sets permissions for services: */
+
+	<service android:name=".Service"
+              android:permission=
+                 "com.example.exampleapp.test.permission.BIND_TO_MAIL_LISTENER"
+              android:enabled="true"
+              android:exported="false">
+              <intent-filter></intent-filter>
+    </service>
+
+
+/* The following sets permissions for 3rd party content provider(s) to access app content */
+
+	<provider android.name="com.exampleapp.test.ContentProvider"
+ 			  android.authorities="com.exampleapp.test.contentprovider"
+ 			  android.readPermission="com.exampleapp.test.permission.DB_READ"
+ 			  android.writePermission="com.exampleapp.test.permission.DB_WRITE"
+ 			  android:grantUriPermissions="true">
+ 	</provider>
+	
+/* The following sets permissions to access only a specified directory: */
+
+	<provider android.name="com.exampleapp.test.ContentProvider"
+ 			  android.authorities="com.exampleapp.test.ContentProvider"
+ 			  android.readPermission="com.exampleapp.test.permission.DB_READ"
+ 			  android.writePermission="com.exampleapp.test.ContentProviderDB_WRITE">
+ 		<grant-uri-permission android:path="/exampledirectory/" />
+ 	</provider>
+	
+/* The following set permissions to accept messages from specified users */
+
+	<receiver android:name=".UIMailBroadcastReceiver"
+              android:permission=
+                 "com.exampleapp.test.permission.MSG_NOTIFY_SEND">
+		<intent-filter>
+			<action android:name="action.MESSAGE_RECEVIED">
+		</intent-filet>
+    </receiver>
+	
+	
+/* The following sets permission level to 'signature' */
+
+	<permission android:name="com.exampleapp.test.permission"
+    android:protectionLevel="signature"/>
+	
+<uses-permission android:name="com.exampleapp.test.permission"/>
